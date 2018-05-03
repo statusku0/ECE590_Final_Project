@@ -18,12 +18,12 @@
 
 \begin{document}
 
-\title{ECE 590 Final Project: Scheduling with N Elevators}
+\title{ECE 590 Final Project: Scheduling with E Elevators}
 \author{Hansung Kang, Kevin Kuo}
 \date{\today}
 \maketitle
 
-\section{Extension to N Elevators}
+\section{Extension to E Elevators}
 \subsection{Construction}
 We start by defining the sets $X_1 = \mathbb{Z}_N$ and $X_2 = \{\uparrow, \downarrow\}$. Letting $X = (X_1 \times X_2) - \{(N, \uparrow), (1, \downarrow)\}$, we can represent both the elevator position and the position of a person requesting an elevator:\\
 
@@ -67,7 +67,7 @@ If a person waits at some point $x \in X$ with destination $d \in X$, and elevat
 \[
 	T = t(e, x) + t(x, d) 
 \]
-Let $\{e_1, e_2, ... , e_E\} \in X$ be a set of elevators. Then let $T_{e_i}$ be the worst-case time defined above for elevator $e_i$. Thus 
+Let $\{e_1, e_2, ... , e_E\} \subset X$ be a set of elevators. Then let $T_{e_i}$ be the worst-case time defined above for elevator $e_i$. Thus 
 \begin{align}
 	T_{e_i} = t(e_i, x) + t(x, d)
 \end{align}
@@ -81,22 +81,21 @@ Let $\{e_1, e_2, ... , e_E\} \in X$ be a set of elevators. Then let $T_{e_i}$ be
 	If $t(e_i, x) = \underset{j \in [1, E]}{\mathrm{min}} t(e_j, x)$, then $T_{e_i} = t(e_i, x) + t(x, d) = \left(\underset{j \in [1, E]}{\mathrm{min}} t(e_j, x)\right) + t(x, d) = \underset{j \in [1, E]}{\mathrm{min}} (t(e_j, x) + t(x, d)) = \underset{j \in [1, E]}{\mathrm{min}} T_{e_j}$
 \end{proof}
 
-To minimize the worst-case time the person at $x$ needs to wait to get to her destination, we pick the elevator $e_i$ such that $T_{e_i} = \underset{j \in [1, E]}{\mathrm{min}} T_{e_j}$. By Proposition 2, this means we choose the elevator $e_i$ such that $t(e_i, x) = \underset{j \in [1, E]}{\mathrm{min}} t(e_j, x)$. Thus, by the definition of $t$, we choose the elevator $e_i$ such that $f(x) - f(e_i) \text{ } (mod \text{ } N)$ is minimized. Note that this expression does not depend on the destination floor the person wants to go to. Thus, in a rough sense, just choosing the "closest" elevator to the person requesting one is the optimal approach to minimizing the worst-case time. 
-
 \subsection{Algorithm}
+Going off the previous section, to minimize the worst-case time the person at $x$ needs to wait to get to her destination, we pick the elevator $e_i$ such that $T_{e_i} = \underset{j \in [1, E]}{\mathrm{min}} T_{e_j}$. By Proposition 2, this means we choose the elevator $e_i$ such that $t(e_i, x) = \underset{j \in [1, E]}{\mathrm{min}} t(e_j, x)$. Thus, by the definition of $t$, we choose the elevator $e_i$ such that $f(x) - f(e_i) \text{ } (mod \text{ } N)$ is minimized. Note that this expression does not depend on the destination floor the person wants to go to. Thus, in a rough sense, just choosing the "closest" elevator to the person requesting one is the optimal approach to minimizing the worst-case time. \\\\
 The following algorithm summarizes the approach we derived:\\\\
-Let $S$ be a system of $E$ elevators $\{e_1, e_2, ... , e_E\} \in X$. An input to $S$ would be a person represented as an element in $X$.\\
+Let $S$ be a system of $E$ elevators $\{e_1, e_2, ... , e_E\} \subset X$. An input to $S$ would be a person represented as an element in $X$.\\
 \begin{algorithm}
 \caption{Minimize worst-case travel time}\label{euclid}
 \begin{algorithmic}[1]
 \Procedure{MinimizeWorstCaseTime}{}
 \For {input $x \in X$ into $S$} 
-	\State minTime $\leftarrow \infty$
+	\State minWeight $\leftarrow \infty$
 	\State minElevator $\leftarrow \emptyset$
 	\For {each elevator $e \in \{e_1, e_2, ... , e_E\} \in X$}
 		\State criterion $\leftarrow f(x) - f(e)$
-		\If {criterion $< \text{minTime}$}
-			\State minTime $\leftarrow$ criterion
+		\If {criterion $< \text{minWeight}$}
+			\State minWeight $\leftarrow$ criterion
 			\State minElevator $\leftarrow e$
 		\EndIf
 	\EndFor
@@ -105,6 +104,17 @@ Let $S$ be a system of $E$ elevators $\{e_1, e_2, ... , e_E\} \in X$. An input t
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\subsection{A Rough Average-Time Analysis}
+\begin{prop}
+	Suppose that the people requesting elevators are uniformly distributed throughout the building. Also assume that their destination floors are uniformly distributed throughout the building. Then, in the long term, the elevators must also be uniformly distributed throughout the building. 
+\end{prop}
+
+\begin{proof}
+	Algorithm 1 does not take into account the actual position of any person in the building -- just the relative position with respect to the elevators. Since the people requesting elevators and their destination floors are uniformly distributed throughout the building, re-numbering the building floors by adding an arbitrary integer to each floor number (modulo $N$) does not change the values calculated in Algorithm 1, and so the long-term distribution of elevators in the building is unchanged. If the elevators tended to be more focused on a specific set of floors, then the re-numbering process would cause the elevators to be focused on a different set of floors (since those floors would be re-numbered). This would contradict the fact that the elevators' long-term distribution should remain unchanged after the re-numbering, and so thus the elevators must be uniformly distributed throughout the building. 
+\end{proof}
+
+Thus, using Algorithm 1, since the elevators are uniformly distributed in the long term, a rough estimate of the average time a person requesting an elevator would have to wait is $\frac{1}{2}\frac{N}{E}$ time units. For $E = 1$, this lines up with intuition -- if a person's position is uniformly distributed, and the elevator's position is uniformly distributed, the absolute difference between the person's and elevator's positions is uniformly distributed between $0$ and $N$, and so the person would have to wait $N/2$ time units on average. 
 
 \subsection{Pitfalls}
 In this algorithm, we do not consider the following factors:
