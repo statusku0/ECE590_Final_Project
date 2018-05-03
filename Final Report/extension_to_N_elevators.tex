@@ -40,7 +40,7 @@ To make $X$ easier to visualize, we wish to arrange its elements in a circle lik
   \caption{Representing $X$ as a circle}
 \end{figure}
 By setting the convention that elevators can only move clockwise in this circle, we can more easily visualize their paths. For instance, if an elevator wanted to move from the $3^{rd}$ floor heading up to the $2^{nd}$ floor heading down, it could travel clockwise from $(2, \uparrow)$ to $(N, \downarrow)$ to $(1, \downarrow)$. (Realistically, if the elevator did not have to stop anywhere else, it could just move straight down -- i.e. skip from $(2, \uparrow)$ to $(2, \downarrow)$, and then go to $(1, \downarrow)$. But, since the following analysis just considers the worst-case timing for the elevator (i.e. stops on every floor in between), we do not need to consider this shorter path.)\\\\
-To create this circle, we represent $X$ as $\mathbb{Z}_{2N - 2}$ by defining the map $f: X \rightarrow \mathbb{Z}_{2N - 2}$ as \\
+To create this circle, we map $X$ onto $\mathbb{Z}_{2N - 2}$ via $f: X \rightarrow \mathbb{Z}_{2N - 2}$ defined as \\
 \begin{align*}
     f(x)=\left\{
                 \begin{array}{ll}
@@ -114,7 +114,7 @@ Let $S$ be a system of $E$ elevators $\{e_1, e_2, ... , e_E\} \subset X$. An inp
 	Algorithm 1 does not take into account the actual position of any person in the building -- just the relative position with respect to the elevators. Since the people requesting elevators and their destination floors are uniformly distributed throughout the building, re-numbering the building floors by adding an arbitrary integer to each floor number (modulo $N$) does not change the values calculated in Algorithm 1, and so the long-term distribution of elevators in the building is unchanged. If the elevators tended to be more focused on a specific set of floors, then the re-numbering process would cause the elevators to be focused on a different set of floors (since those floors would be re-numbered). This would contradict the fact that the elevators' long-term distribution should remain unchanged after the re-numbering, and so thus the elevators must be uniformly distributed throughout the building. 
 \end{proof}
 
-Thus, using Algorithm 1, since the elevators are uniformly distributed in the long term, a rough estimate of the average time a person requesting an elevator would have to wait is $\frac{1}{2}\frac{N}{E}$ time units. For $E = 1$, this lines up with intuition -- if a person's position is uniformly distributed, and the elevator's position is uniformly distributed, the absolute difference between the person's and elevator's positions is uniformly distributed between $0$ and $N$, and so the person would have to wait $N/2$ time units on average. 
+Thus, using Algorithm 1, since the elevators are uniformly distributed in the long term, a rough estimate of the average time a person requesting an elevator would have to wait is $\frac{1}{2}\frac{N}{E}$ time units. For $E = 1$, this lines up with intuition -- if a person's position is uniformly distributed, and the elevator's position is uniformly distributed, then the absolute difference between the person's and elevator's positions is uniformly distributed between $0$ and $N$, and so the person would have to wait $N/2$ time units on average. 
 
 \subsection{Pitfalls}
 In this algorithm, we do not consider the following factors:
