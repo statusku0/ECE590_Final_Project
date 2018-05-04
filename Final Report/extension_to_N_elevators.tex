@@ -24,8 +24,43 @@
 \maketitle
 
 \section{Introduction}
+Network World reports that the cumulative time that office workers spend waiting for elevators in a major city is around 9 years. We spend a lot of time on elevators and waiting for elevators. Even though elevators are common, we have not yet found an optimal solution for the elevator scheduling problem that minimizes everyone’s time spent on the elevator. \\\\
+This problem is still an open problem and is interesting because of the ubiquitousness of elevators. The elevator scheduling problem is reducible to a travelling salesman problem, which is NP-hard. In the real world, there exist many implementations of this problem, but there is not one industrial standard.\\\\
+Amazon, Inc chooses to schedule an elevator using a kiosk system. In this implementation of the elevator, there exists one kiosk at each floor that prompts the users to choose which floor they’d like to go to. Then, the kiosk tells them which elevator to take, and the elevator takes the user to her destination floor.\\\\
+Another implementation includes when the elevator always goes up, or always goes down, and collects people who need to go in that respective direction until all requests are completed.\\\\
+These varying implementations exist across the world, and some try to optimize user experience while others guarantee that each user reaches the destination. We aim to develop a model of an elevator and check for its specifications.
+
+\section{Problem}
+There exist many algorithms for implementing an elevator, and finding the optimized algorithm is beyond the scope of this class, as it is an unsolved problem and is NP-hard. However, we plan to model and verify a One Elevator model of the elevator system, and then extend it to multiple elevators. In this system, we have to take into account many variables. These variables include, but are not limited to, the following:
+
+\begin{itemize}
+	\item The destinations floors chosen inside the elevator
+	\item The user’s intention on each floor (go up, or go down)
+	\item The current direction the elevator is moving
+\end{itemize}
+
+We build a model with these variables in mind and check the model using the model checking techniques presented in class, using UPPAAL.
+
+\section{Approach}
+We first model one elevator, and then extend to E elevators by allocating the inputs to the elevator system among the elevators. 
 
 \section{1-Elevator System}
+
+\begin{figure}
+  \centering
+    \includegraphics[scale=0.6]{elevator}
+  \caption{Elevator Model}
+\end{figure}
+
+\subsection{Model}
+
+\begin{figure}
+  \centering
+    \includegraphics[scale=0.6]{door}
+  \caption{Door Model}
+\end{figure}
+
+\subsection{Verification of Properties}
 
 \section{Extension to E Elevators}
 
@@ -41,7 +76,7 @@ For instance,
 	\item If a person requesting an elevator is at $(4, \downarrow) \in X$, then she is on the $5^{th}$ floor and wants to move downwards. 
 \end{itemize}
 
-To make $X$ easier to deal with, we wish to arrange its elements in a circle like in Figure 1.
+To make $X$ easier to deal with, we wish to arrange its elements in a circle like in Figure 3.
 \begin{figure}
   \centering
     \includegraphics[scale=0.2]{circle}

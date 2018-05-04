@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  4 MAY 2018 03:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  4 MAY 2018 04:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -587,67 +587,109 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 24.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 40.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 40.
-
-<images/circle.jpg, id=1, 1328.965pt x 590.205pt>
-File: images/circle.jpg Graphic file (type jpg)
- <use images/circle.jpg>
-Package pdftex.def Info: images/circle.jpg used on input line 47.
-(pdftex.def)             Requested size: 265.78828pt x 118.0389pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 44--52
+Underfull \hbox (badness 10000) in paragraph at lines 27--32
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--52
+Underfull \hbox (badness 10000) in paragraph at lines 27--32
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--32
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--32
 
  []
 
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 59--62
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 37.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 37.
+
+<images/elevator.png, id=10, 542.025pt x 882.79813pt>
+File: images/elevator.png Graphic file (type png)
+
+<use images/elevator.png>
+Package pdftex.def Info: images/elevator.png used on input line 51.
+(pdftex.def)             Requested size: 325.2175pt x 529.68297pt.
+
+
+LaTeX Warning: Float too large for page by 3.62741pt on input line 53.
+
+<images/door.png, id=12, 761.84625pt x 776.9025pt>
+File: images/door.png Graphic file (type png)
+ <use images/door.png>
+Package pdftex.def Info: images/door.png used on input line 59.
+(pdftex.def)             Requested size: 457.11128pt x 466.14508pt.
+
+Overfull \hbox (112.11128pt too wide) in paragraph at lines 59--60
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
 
  []
 
-[2 <./images/circle.jpg>]
-Overfull \hbox (26.76338pt too wide) in paragraph at lines 84--85
+<images/circle.jpg, id=13, 1328.965pt x 590.205pt>
+File: images/circle.jpg Graphic file (type jpg)
+ <use images/circle.jpg>
+Package pdftex.def Info: images/circle.jpg used on input line 82.
+(pdftex.def)             Requested size: 265.78828pt x 118.0389pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--87
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 79--87
+
+ []
+
+[2] [3 <./images/elevator.png>] [4 <./images/door.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 94--97
+
+ []
+
+[5 <./images/circle.jpg>]
+Overfull \hbox (26.76338pt too wide) in paragraph at lines 119--120
 \OT1/cmr/bx/n/10 Proposition 2. \OT1/cmr/m/it/10 For some $\OML/cmm/m/it/10 i \
 OMS/cmsy/m/n/10 2 \OT1/cmr/m/n/10 [1\OML/cmm/m/it/10 ; E\OT1/cmr/m/n/10 ]$\OT1/
 cmr/m/it/10 , $[] \OMS/cmsy/m/n/10 , []$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--115
+Underfull \hbox (badness 10000) in paragraph at lines 128--150
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--115
+Underfull \hbox (badness 10000) in paragraph at lines 128--150
 
  []
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 135--137
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 170--172
 
  []
 
-[4] [5] (./extension_to_N_elevators.aux) ) 
+[7] [8] (./extension_to_N_elevators.aux) ) 
 Here is how much of TeX's memory you used:
- 3613 strings out of 493014
- 47719 string characters out of 6133351
- 121564 words of memory out of 5000000
- 7075 multiletter control sequences out of 15000+600000
+ 3623 strings out of 493014
+ 47913 string characters out of 6133351
+ 124564 words of memory out of 5000000
+ 7083 multiletter control sequences out of 15000+600000
  12150 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,19n,24p,961b,305s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -668,10 +710,10 @@ sfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
 ts/symbols/msbm10.pfb>
-Output written on extension_to_N_elevators.pdf (5 pages, 199784 bytes).
+Output written on extension_to_N_elevators.pdf (8 pages, 504424 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 101 PDF objects out of 1000 (max. 8388607)
+ 69 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
