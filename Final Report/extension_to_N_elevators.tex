@@ -28,6 +28,10 @@
 \section{1-Elevator System}
 
 \section{Extension to E Elevators}
+
+\subsection{Approach}
+For E elevators, we wish to minimize the worst-case total time it would take for a person to wait for an elevator and get to their destination. In the following sections, we model the environment mathematically and, through a worst-case time analysis, arrive at an optimal algorithm to minimize the worst-case time. 
+
 \subsection{Construction}
 We start by defining the sets $X_1 = \mathbb{Z}_N$ and $X_2 = \{\uparrow, \downarrow\}$. Letting $X = (X_1 \times X_2) - \{(N, \uparrow), (1, \downarrow)\}$, we can represent both the elevator position and the position of a person requesting an elevator:\\
 
@@ -37,7 +41,7 @@ For instance,
 	\item If a person requesting an elevator is at $(4, \downarrow) \in X$, then she is on the $5^{th}$ floor and wants to move downwards. 
 \end{itemize}
 
-To make $X$ easier to visualize, we wish to arrange its elements in a circle like in Figure 1.
+To make $X$ easier to deal with, we wish to arrange its elements in a circle like in Figure 1.
 \begin{figure}
   \centering
     \includegraphics[scale=0.2]{circle}
@@ -86,9 +90,9 @@ Let $\{e_1, e_2, ... , e_E\} \subset X$ be a set of elevators. Then let $T_{e_i}
 \end{proof}
 
 \subsection{Algorithm}
-Going off the previous section, to minimize the worst-case time the person at $x$ needs to wait to get to her destination, we pick the elevator $e_i$ such that $T_{e_i} = \underset{j \in [1, E]}{\mathrm{min}} T_{e_j}$. By Proposition 2, this means we choose the elevator $e_i$ such that $t(e_i, x) = \underset{j \in [1, E]}{\mathrm{min}} t(e_j, x)$. Thus, by the definition of $t$, we choose the elevator $e_i$ such that $f(x) - f(e_i) \text{ } (mod \text{ } N)$ is minimized. Note that this expression does not depend on the destination floor the person wants to go to. Thus, in a rough sense, just choosing the "closest" elevator to the person requesting one is the optimal approach to minimizing the worst-case time. \\\\
+Going off the previous section, to minimize the worst-case time the person at $x$ needs to wait to get to her destination, we pick the elevator $e_i$ such that $T_{e_i} = \underset{j \in [1, E]}{\mathrm{min}} T_{e_j}$. By Proposition 2, this is equivalent to choosing the elevator $e_i$ such that $t(e_i, x) = \underset{j \in [1, E]}{\mathrm{min}} t(e_j, x)$. Thus, by the definition of $t$, we choose the elevator $e_i$ such that $f(x) - f(e_i) \text{ } (mod \text{ } N)$ is minimized. Note that this expression does not depend on the destination floor the person wants to go to. Thus, in a rough sense, just choosing the "closest" elevator to the person requesting one is the optimal approach to minimizing the worst-case time. \\\\
 The following algorithm summarizes the approach we derived:\\\\
-Let $S$ be a system of $E$ elevators $\{e_1, e_2, ... , e_E\} \subset X$. An input to $S$ would be a person represented as an element in $X$.\\
+Let $S$ be a system of $E$ elevators $\{e_1, e_2, ... , e_E\} \subset X$. An input to $S$ would be a person represented as an element in $X$. We are basically dividing the total set of inputs to $S$ among the elevators.\\
 \begin{algorithm}
 \caption{Minimize worst-case travel time}\label{euclid}
 \begin{algorithmic}[1]
@@ -128,9 +132,7 @@ In this algorithm, we do not consider the following factors:
 	\item Time it takes an elevator to collect people at a floor
 	\item The actual time it takes for an elevator to travel between floors.
 \end{itemize}
-We can address the first two bullet points: Step 5 of Algorithm 1 could be modified to not consider elevators that are either full or dysfunctional. \\
-There are two other pitfalls to this approach:\\\\
-Firstly, we only considered the worst-case time. Thus, we assumed that each elevator would stop at each floor when traversing the building. We did not do an average-time analysis, which would not make that assumption. \\\\
-Secondly, we did not consider an elevator's existing stopping points. This could lead to a scenario where one elevator could be assigned a lot of people and others would not; the elevators could become unbalanced in the number of people they have to accommodate. In Algorithm 1, this can be accounted for by improving the criterion set in Step 6. For instance, the criterion could be set to $f(x) - f(e) + P_{e}(n)$, where $P_{e}(n)$ is some weighting factor dependent on the number of people $n$ currently in elevator $e$. If $P_{e}(n)$ increased monotonically with respect to $n$, then elevators that are more empty would become more likely to be chosen for the person at $x$. 
+We can address the first two bullet points: Step 5 of Algorithm 1 could be modified to not consider elevators that are either full or dysfunctional. \\\\
+There is another pitfall to this approach: we did not consider an elevator's existing stopping points. This could lead to a scenario where one elevator could be assigned a lot of people and others would not; the elevators could become unbalanced in the number of people they have to accommodate. In Algorithm 1, this can be accounted for by improving the criterion set in Step 6. For instance, the criterion could be set to $f(x) - f(e) + P_{e}(n)$, where $P_{e}(n)$ is some weighting factor dependent on the number of people $n$ currently in elevator $e$. If $P_{e}(n)$ increased monotonically with respect to $n$, then elevators that are more empty would become more likely to be chosen for the person at $x$. 
 
 \end{document}
