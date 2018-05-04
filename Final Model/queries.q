@@ -3,42 +3,51 @@
 /*
 
 */
-elev_dests[0] != 1 --> elev_dests[0] == 0
+exists\
+(a : int[0,3])\
+build_dests[a] != 0\
+-->\
+forall\
+(a : int[0,3])\
+build_dests[a] == 0
 
 /*
 
 */
-elev_dests[1] != 1 --> elev_dests[1] == 0
+forall\
+(a : int[0,3])\
+build_dests[a] == 0\
+-->\
+exists\
+(a : int[0,3])\
+build_dests[a] != 0
 
 /*
 
 */
-elev_dests[2] != 1 --> elev_dests[2] == 0
+exists\
+(a : int[0,3])\
+elev_dests[a] != 0\
+-->\
+forall\
+(a : int[0,3])\
+elev_dests[a] == 0
 
 /*
 
 */
-elev_dests[3] != 1 --> elev_dests[3] == 0
+forall\
+(a : int[0,3])\
+elev_dests[a] == 0\
+-->\
+exists\
+(a : int[0,3])\
+elev_dests[a] != 0
 
 /*
 
 */
-build_dests[0] != 1 --> build_dests[0] == 0
-
-/*
-
-*/
-build_dests[1] != 1 --> build_dests[1] == 0
-
-/*
-
-*/
-build_dests[2] != 1 --> build_dests[2] == 0
-
-/*
-
-*/
-build_dests[3] != 1 --> build_dests[3] == 0
+E<> blocked == 1 and door_closed == 1
 
 /*
 
