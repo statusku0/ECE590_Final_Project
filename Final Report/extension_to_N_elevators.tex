@@ -42,9 +42,33 @@ There exist many algorithms for implementing an elevator, and finding the optimi
 We build a model with these variables in mind and check the model using the model checking techniques presented in class, using UPPAAL.
 
 \section{Approach}
-We first model one elevator, and then extend to E elevators by allocating the inputs to the elevator system among the elevators. 
+We first model one elevator, and then extend to E elevators by allocating the inputs to the elevator system among the elevators.
 
 \section{1-Elevator System}
+
+For the 1 elevator system, we model the elevator in what we call a "non-interrupted service" philosophy.
+We first present the algorithm. Then we present the model, and some results of verification of its properties.
+
+\subsection{Algorithm}
+The algorithm is simple. The basic idea is to not stop the elevator for requests that require the elevator to
+change direction before fulfilling all requests that are possible without changing direction.
+If the elevator is going up, then any requests for the floor beneath the elevator will be ignored, and
+any requests to go down will be ignored, except for the top floor. The same holds true for when the elevator is going down.
+The algorithm will not be discussed in detail in this report, and it can be found in the uppaal implementation included with
+this report.
+
+\subsection{Model}
+The model is simple. There are many states, some represented as variables and some represented using state buttons. I will just list the variables here, so we can look at the algorithm. The block diagram can be found in Figure 1.\\\\
+Let there be $n$ floors. Here, $n = 4$ for demo purposes.\\\\
+int[0,1] door\_closed;\\
+int[0,1] stopped;\\
+int[0,1] elev\_dests[4];  // floor requests from inside the elevator\\
+int[-1,1] build\_dests[4];  // direction requests from outside the elevator \\
+int[-1,1] direction;  // -1 is going down, 1 is going up, 0 is not moving \\
+int floor;  // {0, ..., n-1} \\
+int [0,1] blocked;
+
+The elevator and door models can be seen below in figures 1 and 2.
 
 \begin{figure}
   \centering
@@ -52,15 +76,26 @@ We first model one elevator, and then extend to E elevators by allocating the in
   \caption{Elevator Model}
 \end{figure}
 
-\subsection{Model}
-
 \begin{figure}
   \centering
-    \includegraphics[scale=0.6]{door}
+    \includegraphics[scale=0.45]{door}
   \caption{Door Model}
 \end{figure}
 
 \subsection{Verification of Properties}
+There were many properties we wanted to test and verify. The most important of these being that if there is a service request,
+then it is fulfilled. On Figure 3, the first and third property checks that. Simply said, if there exists any request, then it
+implies that it will have been fulfilled.\\\\
+For fault tolerance, the 2nd and 4th properties check whether if there are no current requests, then
+is it possible for a request to appear randomly with no additional outside input. The 5th property checks whether if
+the door can be closed and blocked at the same time, ever, and we're glad this property is satisfied. The 6th property checks whether
+there is a deadlock.
+
+\begin{figure}
+  \centering
+    \includegraphics[scale=0.6]{verification}
+  \caption{Verification}
+\end{figure}
 
 \section{Extension to E Elevators}
 
@@ -76,7 +111,7 @@ For instance,
 	\item If a person requesting an elevator is at $(4, \downarrow) \in X$, then she is on the $5^{th}$ floor and wants to move downwards. 
 \end{itemize}
 
-To make $X$ easier to deal with, we wish to arrange its elements in a circle like in Figure 3.
+To make $X$ easier to deal with, we wish to arrange its elements in a circle like in Figure 4.
 \begin{figure}
   \centering
     \includegraphics[scale=0.2]{circle}
@@ -93,7 +128,7 @@ To create this circle, we map $X$ onto $\mathbb{Z}_{2N - 2}$ via $f: X \rightarr
               \right.
 \end{align*}
 where $\pi_{1}(x)$ is the projection of $x$ onto $X_1$, and $\pi_{2}(x)$ is the projection of $x$ onto $X_2$. \\\\
-Thus, using Figure 1 to picture $f(X)$, the top half the circle represents the values $0$ to $N - 1$ in $\mathbb{Z}_{2N - 2}$, and the bottom half represents the values $N$ to $2N - 1$.
+Thus, using Figure 4 to picture $f(X)$, the top half the circle represents the values $0$ to $N - 1$ in $\mathbb{Z}_{2N - 2}$, and the bottom half represents the values $N$ to $2N - 1$.
 
 \subsection{Worst-Case Time Analysis}
 Define the map $t : X \times X \rightarrow \mathbb{Z}_N$ to be $t(x_1, x_2) = f(x_2) - f(x_1) \text{ } (mod \text{ } N)$. 
@@ -103,7 +138,7 @@ Define the map $t : X \times X \rightarrow \mathbb{Z}_N$ to be $t(x_1, x_2) = f(
 \end{prop}
 
 \begin{proof}
-	$e$ must travel clockwise in Figure 1. Thus, letting $T$ be the time $e$ would take, $T \leq f(x_2) - f(x_1) \text{ } (mod \text{ } N) = t(x_1, x_2)$. This upper bound is achievable if $e$ has to stop at every floor along the path from $f(x_1)$ to $f(x_2)$. 
+	$e$ must travel clockwise in Figure 4. Thus, letting $T$ be the time $e$ would take, $T \leq f(x_2) - f(x_1) \text{ } (mod \text{ } N) = t(x_1, x_2)$. This upper bound is achievable if $e$ has to stop at every floor along the path from $f(x_1)$ to $f(x_2)$. 
 \end{proof}
 
 If a person waits at some point $x \in X$ with destination $d \in X$, and elevator $e \in X$ had to come to pick them up, then, by Proposition 1, the worst-case time to travel from $e$ to $x$ is $t(e, x)$, and the worst-case time to travel from $x$ to $d$ is $t(x, d)$.  Thus, the worst-case time $T$ it would take for elevator $e \in X$ to pick up the person and take them to their destination would be 
